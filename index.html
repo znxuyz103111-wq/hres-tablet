@@ -151,7 +151,7 @@
     const badges = (d.badges||[]).map(b => '<span class="ipad-tag">' + b + '</span>').join('');
     const word = d.word ? '<span class="word-tag">WORD</span>' : '';
     const online = d.online ? '<a class="online-link" href="' + d.online + '" target="_blank" rel="noopener">' + LINKSVG + '線上填寫 Google 表單</a>' : '';
-    const pdfLabel = d.online ? '下載紙本（PDF）' : '下載文件';
+    const pdfLabel = d.online ? '下載文件（PDF）' : '下載文件（PDF）';
     const wordBtn = d.word ? '<a class="word-btn" href="' + enc(d.word) + '" download>' + WSVG + '下載 Word（可編輯）</a>' : '';
     return ''
       + '<div class="card" style="--accent:' + c.accent + ';--soft:' + c.soft + '">'
