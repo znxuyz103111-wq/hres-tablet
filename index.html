@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>和仁國小　平板載具計畫文件下載專區</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{--navy:#15375B;--ink:#1E293B;--soft:#465569;--muted:#6B7A8D;--line:#E2E8F0;--bg:#EEF2F7;}
+  body{font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#15375B 0%,#1F4E79 45%,#2E75B6 100%);color:#fff;padding:60px 20px 56px;text-align:center;}
+  .hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(255,255,255,.08) 0,transparent 40%),radial-gradient(circle at 80% 70%,rgba(255,255,255,.06) 0,transparent 45%);}
+  .hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.10) 1.4px,transparent 1.4px);background-size:26px 26px;opacity:.55;}
+  .hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+  .badge-top{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:6px 16px;border-radius:30px;font-size:13px;letter-spacing:1px;margin-bottom:18px;backdrop-filter:blur(4px);}
+  .badge-top .dot{width:7px;height:7px;border-radius:50%;background:#7FE3A1;box-shadow:0 0 8px #7FE3A1;}
+  .hero h1{font-size:38px;font-weight:800;letter-spacing:1px;margin-bottom:14px;text-shadow:0 2px 12px rgba(0,0,0,.18);}
+  .hero .lead{font-size:15.5px;opacity:.94;max-width:600px;margin:0 auto 26px;}
+  .stats{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .stat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:12px 22px;backdrop-filter:blur(4px);}
+  .stat .num{font-size:24px;font-weight:800;}
+  .stat .lbl{font-size:12px;opacity:.85;letter-spacing:.5px;}
+  .wave{position:absolute;bottom:-1px;left:0;width:100%;line-height:0;z-index:1;}
+
+  /* Wrap */
+  .wrap{max-width:1100px;margin:0 auto;padding:8px 20px 64px;}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 22px;margin:-28px 0 32px;position:relative;z-index:2;box-shadow:0 8px 30px rgba(21,55,91,.10);}
+  .toolbar .tip{font-size:13.5px;color:#465569;display:flex;align-items:center;gap:8px;}
+  .zip-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#1F4E79,#2E75B6);color:#fff;border:none;border-radius:10px;padding:11px 20px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:.18s;box-shadow:0 4px 14px rgba(31,78,121,.28);white-space:nowrap;}
+  .zip-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(31,78,121,.4);}
+  .zip-btn:active{transform:translateY(0);}
+  .zip-btn:disabled{opacity:.6;cursor:wait;}
+
+  /* Category */
+  .cat{margin-bottom:42px;}
+  .cat-head{display:flex;align-items:center;gap:15px;margin-bottom:20px;}
+  .cat-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+  .cat-text h2{font-size:22px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:10px;}
+  .cat-count{color:#fff;font-size:13px;font-weight:700;min-width:24px;height:24px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;padding:0 8px;}
+  .cat-text p{font-size:13.5px;color:#566578;}
+
+  /* Grid + Card */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px;}
+  .card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 2px 10px rgba(21,55,91,.06);transition:.22s;display:flex;flex-direction:column;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(21,55,91,.16);border-color:var(--accent);}
+  .card-bar{height:5px;background:var(--accent);}
+  .card-body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1;}
+  .card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+  .card-icon{width:50px;height:50px;border-radius:13px;background:var(--soft,#F1F5F9);background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:26px;}
+  .card-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+  .pdf-tag{background:#C0392B;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.5px;}
+  .size{font-size:12.5px;color:#64748B;font-weight:500;}
+  .ipad-tag{background:#1F2937;color:#fff;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.3px;white-space:nowrap;}
+  .word-tag{background:#2B579A;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.5px;}
+  .word-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#fff;color:#2B579A;border:2px solid #2B579A;border-radius:10px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:.16s;width:100%;margin-top:9px;}
+  .word-btn:hover{background:#2B579A;color:#fff;}
+  .card-title{font-size:17.5px;font-weight:800;color:var(--ink);margin-bottom:10px;line-height:1.42;letter-spacing:.2px;}
+  .card-desc{font-size:14px;color:#3D4B5C;flex:1;margin-bottom:18px;line-height:1.72;letter-spacing:.1px;}
+  .dl-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:11px 16px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:.16s;width:100%;}
+  .dl-btn:hover{filter:brightness(1.08);box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 40%,transparent);}
+  .dl-btn:active{transform:scale(.98);}
+  .online-link{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#fff;color:#0B8043;border:2px solid #0B8043;border-radius:10px;padding:9px 16px;font-size:14.5px;font-weight:700;text-decoration:none;transition:.16s;width:100%;margin-bottom:10px;}
+  .online-link:hover{background:#0B8043;color:#fff;box-shadow:0 4px 14px rgba(11,128,67,.3);}
+
+  /* Footer */
+  .footer{background:#15375B;color:#B8C9DC;text-align:center;padding:36px 20px;}
+  .footer .ftitle{color:#fff;font-weight:700;font-size:15px;margin-bottom:8px;}
+  .footer p{font-size:13px;opacity:.88;margin:3px 0;}
+  .footer .upd{margin-top:14px;font-size:12px;opacity:.6;}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#15375B;color:#fff;padding:13px 24px;border-radius:12px;font-size:14px;box-shadow:0 8px 28px rgba(0,0,0,.3);opacity:0;transition:.3s;z-index:99;}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+  @media(max-width:560px){
+    .hero h1{font-size:28px;}
+    .grid{grid-template-columns:1fr;}
+    .toolbar{flex-direction:column;align-items:stretch;}
+    .zip-btn{justify-content:center;}
+  }
+
+  .dl-btn, .word-btn, .zip-btn { text-decoration:none; }
+  a.dl-btn:visited, a.word-btn:visited { color:inherit; }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-dots"></div>
+    <div class="hero-inner">
+      <span class="badge-top"><span class="dot"></span>彰化縣 115-118 年數位學習精進方案 2.0</span>
+      <h1>平板載具計畫　文件下載專區</h1>
+      <p class="lead">彰化縣和美鎮和仁國民小學．本頁彙整校內平板載具計畫各項文件，請依需要點選下載或一鍵打包。</p>
+      <div class="stats">
+        <div class="stat"><div class="num" id="stNum">10</div><div class="lbl">份文件</div></div>
+        <div class="stat"><div class="num">3</div><div class="lbl">種機型</div></div>
+        <div class="stat"><div class="num">PDF＋Word</div><div class="lbl">雙格式下載</div></div>
+      </div>
+    </div>
+    <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none" width="100%" height="60"><path d="M0,30 C360,60 720,0 1080,24 C1260,36 1380,30 1440,26 L1440,60 L0,60 Z" fill="#EEF2F7"/></svg></div>
+  </header>
+
+  <div class="wrap">
+    <div class="toolbar">
+      <div class="tip">💡 點選卡片即可下載存檔；表單類另提供 Word 可編輯版，方便老師直接修改填寫。</div>
+      <button class="zip-btn" id="zipBtn" onclick="downloadAll()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg>全部打包下載（ZIP）</button>
+    </div>
+
+    <main id="cats"></main>
+  </div>
+
+  <footer class="footer">
+    <div class="ftitle">彰化縣和美鎮和仁國民小學　教務處資訊組</div>
+    <p>本文件組依據彰化縣政府「115 年度中小學數位學習行動載具採購案」編製</p>
+    <p>如對文件內容有疑問，請洽教務處資訊組</p>
+    <p class="upd">最後更新：2026/06/11</p>
+  </footer>
+
+<script src="lib/jszip.min.js"></script>
+<script>
+  // ╔══════════════════════════════════════════════════════════════╗
+    // ║  要新增文件？只要兩步：                                         ║
+    // ║  1) 把檔案（PDF，必要時加 Word）放進 files/ 資料夾              ║
+    // ║  2) 在下面 DOCS 複製任一行、改成你的文件（最後一行也要有逗號）   ║
+    // ║  可省略欄位：word（無 Word 版）、online（無表單）、badges（無徽章）║
+    // ║  cat 可填：導師必備 / 表單下載 / 校務規範 / 教室張貼 / 學生宣導   ║
+    // ╚══════════════════════════════════════════════════════════════╝
+    const CATS = {"導師必備": {"icon": "📘", "bg": "#DBEAFE", "count": "#2563EB", "accent": "#2563EB", "soft": "#DBEAFE", "desc": "每位導師都要下載、熟讀並使用的文件"}, "表單下載": {"icon": "📂", "bg": "#CFFAFE", "count": "#0891B2", "accent": "#0891B2", "soft": "#CFFAFE", "desc": "依需要列印填寫的各式表單"}, "校務規範": {"icon": "📜", "bg": "#FEF3C7", "count": "#B45309", "accent": "#B45309", "soft": "#FEF3C7", "desc": "經校務會議通過、公告周知的管理規範"}, "教室張貼": {"icon": "📌", "bg": "#FFEDD5", "count": "#EA580C", "accent": "#EA580C", "soft": "#FFEDD5", "desc": "列印後張貼於教室或充電車旁的圖示"}, "學生宣導": {"icon": "🤖", "bg": "#EDE9FE", "count": "#7C3AED", "accent": "#7C3AED", "soft": "#EDE9FE", "desc": "可列印發給學生或張貼，培養正確的數位素養"}};
+  
+    const DOCS = [
+      {"cat": "導師必備", "icon": "📖", "title": "班級平板載具使用手冊", "desc": "導師日常操作總指引：涵蓋 iPad、Chromebook、Surface Go 三機型、充電車管理、故障處理、學生使用規範與 Q&A。", "pdf": "和仁國小班級平板載具使用手冊.pdf", "word": "和仁國小班級平板載具使用手冊.docx", "size": "880.6 KB"},
+      {"cat": "導師必備", "icon": "📋", "title": "班級平板載具點交單", "desc": "學期初領用平板時填寫，逐台清點、雙方簽章，含責任延續性條款。", "pdf": "和仁國小班級平板載具點交單.pdf", "word": "和仁國小班級平板載具點交單.docx", "size": "134.5 KB"},
+      {"cat": "導師必備", "icon": "🏠", "title": "學生校外攜用家長同意暨切結書", "desc": "學生需將平板帶回家（校外攜用）時，由家長填寫並四方核章。", "pdf": "和仁國小_學生數位學習載具校外攜用家長同意暨切結書.pdf", "word": "和仁國小_學生數位學習載具校外攜用家長同意暨切結書.docx", "size": "149.4 KB"},
+      {"cat": "表單下載", "icon": "🔍", "title": "期末清點異常表", "desc": "學期末清點平板時，記錄異常設備、配件缺漏、車體狀況、學生過失案件。", "pdf": "和仁國小_期末清點異常表.pdf", "word": "和仁國小_期末清點異常表.docx", "size": "182.3 KB"},
+      {"cat": "表單下載", "icon": "📱", "title": "App 派送申請表", "desc": "教學需新增 App 時填寫，送資訊組轉縣網中心審核派送。可線上填寫，或下載紙本。", "pdf": "和仁國小_App派送申請表.pdf", "word": "和仁國小_App派送申請表.docx", "online": "https://forms.gle/ShvjVsdRH9ZN2qR1A", "badges": ["iPad 專用"], "size": "78.1 KB"},
+      {"cat": "表單下載", "icon": "🔄", "title": "平板載具財產物品清點移交清冊", "desc": "教師調動、退休、離職時，將平板載具完整交接給下一位老師。", "pdf": "和仁國小_平板載具財產物品清點移交清冊.pdf", "word": "和仁國小_平板載具財產物品清點移交清冊.docx", "size": "134.6 KB"},
+      {"cat": "表單下載", "icon": "🚫", "title": "瀏覽器網頁封鎖申請單", "desc": "導師依教學需求申請封鎖特定網站（遊戲、影音、社群等），由資訊組透過 SUDO MDM（iPad）或 Google Workspace（Chromebook）套用。可線上填寫，或下載紙本／Word。", "pdf": "和仁國小_班級平板瀏覽器網頁封鎖申請單.pdf", "word": "和仁國小_班級平板瀏覽器網頁封鎖申請單.docx", "online": "https://forms.gle/5KMzXcNG3reghbg96", "badges": ["iPad／Chromebook 專用"], "size": "145.7 KB"},
+      {"cat": "校務規範", "icon": "📜", "title": "教育用行動載具管理原則", "desc": "經校務會議通過之載具管理規範：配發與保管、跨班借用、校外攜用、使用規範、故障賠償與個資保護等。", "pdf": "和仁國小_教育用行動載具管理原則.pdf", "word": "和仁國小_教育用行動載具管理原則.docx", "size": "211.8 KB"},
+      {"cat": "教室張貼", "icon": "🖼️", "title": "平板放置示意圖", "desc": "真實照片版，貼在充電車旁，教學生正確放置平板、避免螢幕亮屏耗電。", "pdf": "和仁國小_平板放置示意圖.pdf", "size": "229.3 KB"},
+      {"cat": "學生宣導", "icon": "🧠", "title": "學生 AI 使用與學習指南", "desc": "依教育部《高級中等以下學校人工智慧使用和學習指引》改寫的 7 項原則，引導學生聰明、安全、負責任地使用 AI。", "pdf": "和仁國小_學生AI使用與學習指南.pdf", "word": "和仁國小_學生AI使用與學習指南.docx", "size": "117.0 KB"},
+    ];
+
+  const DLSVG = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>';
+  const WSVG = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>';
+  const LINKSVG = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6m0-6L10 14M9 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-3"/></svg>';
+  const enc = f => 'files/' + encodeURIComponent(f);
+
+  function cardHTML(d) {
+    const c = CATS[d.cat];
+    const badges = (d.badges||[]).map(b => '<span class="ipad-tag">' + b + '</span>').join('');
+    const word = d.word ? '<span class="word-tag">WORD</span>' : '';
+    const online = d.online ? '<a class="online-link" href="' + d.online + '" target="_blank" rel="noopener">' + LINKSVG + '線上填寫 Google 表單</a>' : '';
+    const pdfLabel = d.online ? '下載紙本（PDF）' : '下載文件';
+    const wordBtn = d.word ? '<a class="word-btn" href="' + enc(d.word) + '" download>' + WSVG + '下載 Word（可編輯）</a>' : '';
+    return ''
+      + '<div class="card" style="--accent:' + c.accent + ';--soft:' + c.soft + '">'
+      +   '<div class="card-bar"></div>'
+      +   '<div class="card-body">'
+      +     '<div class="card-head">'
+      +       '<div class="card-icon">' + d.icon + '</div>'
+      +       '<div class="card-meta">' + badges + '<span class="pdf-tag">PDF</span>' + word + '<span class="size">' + d.size + '</span></div>'
+      +     '</div>'
+      +     '<h3 class="card-title">' + d.title + '</h3>'
+      +     '<p class="card-desc">' + d.desc + '</p>'
+      +     online
+      +     '<a class="dl-btn" href="' + enc(d.pdf) + '" download>' + DLSVG + pdfLabel + '</a>'
+      +     wordBtn
+      +   '</div>'
+      + '</div>';
+  }
+
+  function render() {
+    const host = document.getElementById('cats');
+    let html = '';
+    Object.keys(CATS).forEach(cat => {
+      const items = DOCS.filter(d => d.cat === cat);
+      if (!items.length) return;
+      const c = CATS[cat];
+      html += ''
+        + '<section class="cat">'
+        +   '<div class="cat-head">'
+        +     '<div class="cat-icon" style="background:' + c.bg + '">' + c.icon + '</div>'
+        +     '<div class="cat-text">'
+        +       '<h2>' + cat + '<span class="cat-count" style="background:' + c.count + '">' + items.length + '</span></h2>'
+        +       '<p>' + c.desc + '</p>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="grid">' + items.map(cardHTML).join('') + '</div>'
+        + '</section>';
+    });
+    host.innerHTML = html;
+    document.getElementById('stNum').textContent = DOCS.length;
+  }
+  render();
+
+  async function downloadAll() {
+    const btn = document.getElementById('zipBtn');
+    const orig = btn.innerHTML;
+    btn.disabled = true; btn.textContent = '打包中…';
+    try {
+      const zip = new JSZip();
+      const pdfs = DOCS.filter(d => d.pdf);
+      for (const d of pdfs) {
+        const res = await fetch(enc(d.pdf));
+        if (!res.ok) throw new Error(d.pdf);
+        zip.file(d.pdf, await res.arrayBuffer());
+      }
+      const blob = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '和仁國小平板文件_打包.zip';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      alert('打包失敗（' + e.message + '）。請重新整理後再試，或單獨下載各檔。');
+    } finally {
+      btn.disabled = false; btn.innerHTML = orig;
+    }
+  }
+</script>
+</body>
+</html>
