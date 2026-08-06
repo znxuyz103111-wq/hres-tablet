@@ -166,7 +166,7 @@
       {"cat": "表單下載", "icon": "🔄", "title": "平板載具財產物品清點移交清冊", "desc": "教師調動、退休、離職時，將平板載具完整交接給下一位老師。", "pdf": "和仁國小_平板載具財產物品清點移交清冊.pdf", "word": "和仁國小_平板載具財產物品清點移交清冊.docx", "size": "134.6 KB"},
       {"cat": "表單下載", "icon": "🚫", "title": "瀏覽器網頁封鎖申請單", "desc": "導師依教學需求申請封鎖特定網站（遊戲、影音、社群等），由資訊組透過 SUDO MDM（iPad）或 Google Workspace（Chromebook）套用。可線上填寫，或下載紙本／Word。", "pdf": "班級平板瀏覽器網頁封鎖申請單.pdf", "word": "班級平板瀏覽器網頁封鎖申請單.docx", "online": "https://forms.gle/5KMzXcNG3reghbg96", "badges": ["iPad／Chromebook 專用"], "size": "145.7 KB"},
     {"cat": "表單下載", "icon": "🤝", "title": "跨班借用登記表", "desc": "科任或其他教師需用本班配發以外的機型時，向該機型之載具管理教師（導師）商借並登記，以當日歸還為原則。", "pdf": "教育載具跨班借用登記表.pdf", "word": "教育載具跨班借用登記表.docx", "size": "67.3 KB"},
-      {"cat": "表單下載", "icon": "📶", "title": "各班 WiFi 連線 QR Code", "desc": "掃描 QR 即可加入該班無線網路（供 iPad／手機快速連線），可列印張貼於教室。", "action": "wifi", "size": "30 班"},
+      {"cat": "表單下載", "icon": "📶", "title": "各教室 WiFi 連線 QR Code", "desc": "掃描 QR 即可加入該教室無線網路（供 iPad／手機快速連線），可列印張貼於各教室。", "action": "wifi", "size": "35 間"},
       {"cat": "學生宣導", "icon": "🧠", "title": "學生 AI 使用與學習指南", "desc": "依教育部《高級中等以下學校人工智慧使用和學習指引》改寫的 7 項原則，引導學生聰明、安全、負責任地使用 AI。", "pdf": "學生AI使用與學習指南.pdf", "word": "學生AI使用與學習指南.docx", "size": "117.0 KB"},
       {"cat": "學生宣導", "icon": "🖼️", "title": "平板放置示意圖", "desc": "真實照片版，貼在充電車旁，教學生正確放置平板、避免螢幕亮屏耗電。", "pdf": "平板放置示意圖.pdf", "size": "229.3 KB"},
     ];
@@ -180,38 +180,43 @@
   // ── 各班 WiFi 設定 ──────────────────────────────────────────
   // 全校同一組 WiFi：只填 WIFI_SHARED 這一行，30 班就都用它。
   // 某班用自己的網路：在 WIFI 該班後面加  ,ssid:"名稱",pw:"密碼"
-  const WIFI_SHARED = { ssid:"", pw:"", enc:"WPA" };   // enc 可為 WPA / WEP / nopass
+  const WIFI_SHARED = { ssid:"", pw:"hres8981", enc:"WPA" };   // 全校共用密碼；各教室 SSID 見下方 WIFI   // enc 可為 WPA / WEP / nopass
   const WIFI = [
-    {cls:"一年1班"},
-    {cls:"一年2班"},
-    {cls:"一年3班"},
-    {cls:"一年4班"},
-    {cls:"一年5班"},
-    {cls:"二年1班"},
-    {cls:"二年2班"},
-    {cls:"二年3班"},
-    {cls:"二年4班"},
-    {cls:"二年5班"},
-    {cls:"三年1班"},
-    {cls:"三年2班"},
-    {cls:"三年3班"},
-    {cls:"三年4班"},
-    {cls:"三年5班"},
-    {cls:"四年1班"},
-    {cls:"四年2班"},
-    {cls:"四年3班"},
-    {cls:"四年4班"},
-    {cls:"四年5班"},
-    {cls:"五年1班"},
-    {cls:"五年2班"},
-    {cls:"五年3班"},
-    {cls:"五年4班"},
-    {cls:"五年5班"},
-    {cls:"六年1班"},
-    {cls:"六年2班"},
-    {cls:"六年3班"},
-    {cls:"六年4班"},
-    {cls:"六年5班"}
+    {ssid:"Hres101"},
+    {ssid:"Hres102"},
+    {ssid:"Hres103"},
+    {ssid:"Hres104"},
+    {ssid:"Hres107"},
+    {ssid:"Hres108"},
+    {ssid:"Hres109"},
+    {ssid:"Hres110"},
+    {ssid:"Hres111"},
+    {ssid:"Hres112"},
+    {ssid:"Hres201"},
+    {ssid:"Hres202"},
+    {ssid:"Hres203"},
+    {ssid:"Hres204"},
+    {ssid:"Hres205"},
+    {ssid:"Hres206"},
+    {ssid:"Hres207"},
+    {ssid:"Hres208"},
+    {ssid:"Hres209"},
+    {ssid:"Hres210"},
+    {ssid:"Hres211"},
+    {ssid:"Hres212"},
+    {ssid:"Hres213"},
+    {ssid:"Hres214"},
+    {ssid:"Hres301"},
+    {ssid:"Hres302"},
+    {ssid:"Hres303"},
+    {ssid:"Hres304"},
+    {ssid:"Hres305"},
+    {ssid:"Hres306"},
+    {ssid:"Hres307"},
+    {ssid:"Hres308"},
+    {ssid:"Hres309"},
+    {ssid:"Hres310"},
+    {ssid:"Hres313"}
   ];
 
   function wifiStr(ssid,pw,enc){
@@ -226,14 +231,16 @@
       const ssid = w.ssid || WIFI_SHARED.ssid;
       const pw   = (w.pw!==undefined ? w.pw : WIFI_SHARED.pw);
       const enc  = w.enc || WIFI_SHARED.enc || 'WPA';
+      const label = w.cls || ssid || '';
       let inner;
       if(!ssid){
         inner='<div class="unset">尚未設定<br>請於 index.html 的<br>WIFI 清單填入</div>';
       }else{
         const qr=qrcode(0,'M'); qr.addData(wifiStr(ssid,pw,enc)); qr.make();
-        inner='<img src="'+qr.createDataURL(6,2)+'" alt="'+w.cls+'"><div class="ssid">'+ssid+'</div>';
+        const ssidLine = (label!==ssid) ? '<div class="ssid">'+ssid+'</div>' : '';
+        inner='<img src="'+qr.createDataURL(6,2)+'" alt="'+label+'">'+ssidLine;
       }
-      return '<div class="wifi-cell"><div class="cls">'+w.cls+'</div>'+inner+'</div>';
+      return '<div class="wifi-cell"><div class="cls">'+label+'</div>'+inner+'</div>';
     }).join('');
   }
   function openWifi(){ if(!wifiBuilt){buildWifi();wifiBuilt=true;} document.getElementById('wifiModal').classList.add('open'); }
@@ -308,13 +315,13 @@
   <div class="wifi-modal" id="wifiModal">
     <div class="wifi-box">
       <div class="wifi-head">
-        <h2>各班 WiFi 連線 QR Code</h2>
+        <h2>各教室 WiFi 連線 QR Code</h2>
         <div class="wifi-actions">
           <button class="wifi-btn wifi-print" onclick="window.print()">列印</button>
           <button class="wifi-btn wifi-close" onclick="closeWifi()">關閉</button>
         </div>
       </div>
-      <p class="wifi-sub">用手機或 iPad 相機掃描，即可加入該班無線網路。</p>
+      <p class="wifi-sub">所有教室共用密碼 <b>hres8981</b>　·　用手機或 iPad 相機掃描即可加入。</p>
       <div class="wifi-grid" id="wifiGrid"></div>
     </div>
   </div>
