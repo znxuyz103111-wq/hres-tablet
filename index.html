@@ -263,7 +263,6 @@
     const qr=qrcode(0,'M'); qr.addData(wifiStr(ssid,pw,enc)); qr.make();
     document.getElementById('zoomTitle').textContent=label;
     document.getElementById('zoomImg').src=qr.createDataURL(14,4);
-    document.getElementById('zoomPw').textContent='SSID：'+ssid+(pw?('　密碼：'+pw):'');
     document.getElementById('wifiZoom').classList.add('open');
   }
   function closeZoom(){ document.getElementById('wifiZoom').classList.remove('open'); }
@@ -337,7 +336,6 @@
   <div class="wifi-zoom" id="wifiZoom" onclick="closeZoom()">
     <div class="zoom-title" id="zoomTitle"></div>
     <img id="zoomImg" alt="QR">
-    <div class="zoom-pw" id="zoomPw"></div>
     <div class="zoom-hint">點畫面任一處關閉</div>
   </div>
   <div class="wifi-modal" id="wifiModal">
@@ -349,7 +347,7 @@
           <button class="wifi-btn wifi-close" onclick="closeWifi()">關閉</button>
         </div>
       </div>
-      <p class="wifi-sub">依照教室分機連接WiFi，所有教室共用密碼 <b>hres8981</b>　·　<b>點任一 QR 可放大投影</b>，讓學生用相機掃描加入。</p>
+      <p class="wifi-sub">所有教室共用密碼 <b>hres8981</b>　·　<b>點任一 QR 可放大投影</b>，讓學生用相機掃描加入。</p>
       <div class="wifi-grid" id="wifiGrid"></div>
     </div>
   </div>
