@@ -104,6 +104,14 @@
   .wifi-cell img{width:100%;max-width:128px;height:auto;image-rendering:pixelated;background:#fff;border-radius:6px;}
   .wifi-cell .ssid{font-size:11px;color:#64748B;margin-top:6px;word-break:break-all;}
   .wifi-cell .unset{font-size:12px;color:#B45309;padding:26px 4px;line-height:1.5;}
+  .wifi-cell.qr{cursor:pointer;transition:.15s;}
+  .wifi-cell.qr:hover{border-color:#0891B2;box-shadow:0 6px 18px rgba(8,145,178,.18);transform:translateY(-2px);}
+  .wifi-zoom{position:fixed;inset:0;background:rgba(15,23,42,.92);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:1100;padding:24px;cursor:zoom-out;}
+  .wifi-zoom.open{display:flex;}
+  .zoom-title{color:#fff;font-size:32px;font-weight:800;margin-bottom:18px;letter-spacing:1px;}
+  .wifi-zoom img{width:min(74vh,86vw);height:auto;background:#fff;padding:16px;border-radius:14px;image-rendering:pixelated;}
+  .zoom-pw{color:#E2E8F0;font-size:20px;font-weight:600;margin-top:18px;}
+  .zoom-hint{color:#94A3B8;font-size:14px;margin-top:10px;}
   @media print{
     body>*:not(.wifi-modal){display:none!important;}
     .wifi-modal{position:static;background:#fff;padding:0;display:block!important;overflow:visible;}
@@ -227,24 +235,38 @@
   let wifiBuilt=false;
   function buildWifi(){
     const grid=document.getElementById('wifiGrid');
-    grid.innerHTML = WIFI.map(w=>{
+    grid.innerHTML = WIFI.map((w,i)=>{
       const ssid = w.ssid || WIFI_SHARED.ssid;
       const pw   = (w.pw!==undefined ? w.pw : WIFI_SHARED.pw);
       const enc  = w.enc || WIFI_SHARED.enc || 'WPA';
       const label = w.cls || ssid || '';
-      let inner;
+      let inner, cls='wifi-cell', click='';
       if(!ssid){
         inner='<div class="unset">尚未設定<br>請於 index.html 的<br>WIFI 清單填入</div>';
       }else{
         const qr=qrcode(0,'M'); qr.addData(wifiStr(ssid,pw,enc)); qr.make();
         const ssidLine = (label!==ssid) ? '<div class="ssid">'+ssid+'</div>' : '';
         inner='<img src="'+qr.createDataURL(6,2)+'" alt="'+label+'">'+ssidLine;
+        cls='wifi-cell qr'; click=' onclick="zoomWifi('+i+')"';
       }
-      return '<div class="wifi-cell"><div class="cls">'+label+'</div>'+inner+'</div>';
+      return '<div class="'+cls+'"'+click+'><div class="cls">'+label+'</div>'+inner+'</div>';
     }).join('');
   }
   function openWifi(){ if(!wifiBuilt){buildWifi();wifiBuilt=true;} document.getElementById('wifiModal').classList.add('open'); }
   function closeWifi(){ document.getElementById('wifiModal').classList.remove('open'); }
+  function zoomWifi(i){
+    const w=WIFI[i];
+    const ssid=w.ssid||WIFI_SHARED.ssid;
+    const pw=(w.pw!==undefined?w.pw:WIFI_SHARED.pw);
+    const enc=w.enc||WIFI_SHARED.enc||'WPA';
+    const label=w.cls||ssid;
+    const qr=qrcode(0,'M'); qr.addData(wifiStr(ssid,pw,enc)); qr.make();
+    document.getElementById('zoomTitle').textContent=label;
+    document.getElementById('zoomImg').src=qr.createDataURL(14,4);
+    document.getElementById('zoomPw').textContent='SSID：'+ssid+(pw?('　密碼：'+pw):'');
+    document.getElementById('wifiZoom').classList.add('open');
+  }
+  function closeZoom(){ document.getElementById('wifiZoom').classList.remove('open'); }
 
   function cardHTML(d) {
     if (d.action === 'wifi') {
@@ -312,6 +334,12 @@
   }
   render();
 </script>
+  <div class="wifi-zoom" id="wifiZoom" onclick="closeZoom()">
+    <div class="zoom-title" id="zoomTitle"></div>
+    <img id="zoomImg" alt="QR">
+    <div class="zoom-pw" id="zoomPw"></div>
+    <div class="zoom-hint">點畫面任一處關閉</div>
+  </div>
   <div class="wifi-modal" id="wifiModal">
     <div class="wifi-box">
       <div class="wifi-head">
@@ -321,7 +349,7 @@
           <button class="wifi-btn wifi-close" onclick="closeWifi()">關閉</button>
         </div>
       </div>
-      <p class="wifi-sub">所有教室共用密碼 <b>hres8981</b>　·　用手機或 iPad 相機掃描即可加入。</p>
+      <p class="wifi-sub">所有教室共用密碼 <b>hres8981</b>　·　<b>點任一 QR 可放大投影</b>，讓學生用相機掃描加入。</p>
       <div class="wifi-grid" id="wifiGrid"></div>
     </div>
   </div>
