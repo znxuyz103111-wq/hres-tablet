@@ -102,6 +102,7 @@
   .wifi-cell{border:1px solid #E2E8F0;border-radius:12px;padding:12px 10px;text-align:center;background:#F8FAFC;}
   .wifi-cell .cls{font-size:14px;font-weight:800;color:var(--ink,#1E293B);margin-bottom:8px;}
   .wifi-cell img{width:100%;max-width:128px;height:auto;image-rendering:pixelated;background:#fff;border-radius:6px;}
+  .wifi-cell .qrbox svg{width:100%;max-width:132px;height:auto;display:block;margin:0 auto;}
   .wifi-cell .ssid{font-size:11px;color:#64748B;margin-top:6px;word-break:break-all;}
   .wifi-cell .unset{font-size:12px;color:#B45309;padding:26px 4px;line-height:1.5;}
   .wifi-cell.qr{cursor:pointer;transition:.15s;}
@@ -110,6 +111,7 @@
   .wifi-zoom.open{display:flex;}
   .zoom-title{color:#fff;font-size:32px;font-weight:800;margin-bottom:18px;letter-spacing:1px;}
   .wifi-zoom img{width:min(74vh,86vw);height:auto;background:#fff;padding:16px;border-radius:14px;image-rendering:pixelated;}
+  .wifi-zoom #zoomImg svg{width:min(74vh,86vw);height:auto;background:#fff;padding:18px;border-radius:16px;display:block;}
   .zoom-pw{color:#E2E8F0;font-size:20px;font-weight:600;margin-top:18px;}
   .zoom-hint{color:#94A3B8;font-size:14px;margin-top:10px;}
   @media print{
@@ -232,6 +234,25 @@
     if(enc==='nopass') return 'WIFI:T:nopass;S:'+esc(ssid)+';;';
     return 'WIFI:T:'+(enc||'WPA')+';S:'+esc(ssid)+';P:'+esc(pw)+';;';
   }
+  // 產生「圓點＋圓角定位框」藍色設計款 QR（SVG）
+  function styledQR(text, ecc){
+    const DATA='#1E6FE6', FINDER='#0B3D91';
+    const qr=qrcode(0, ecc||'Q'); qr.addData(text); qr.make();
+    const n=qr.getModuleCount(), m=4, size=n+m*2;
+    const inFinder=(r,c)=>((r<7&&c<7)||(r<7&&c>=n-7)||(r>=n-7&&c<7));
+    let s='';
+    for(let r=0;r<n;r++){for(let c=0;c<n;c++){
+      if(!qr.isDark(r,c)||inFinder(r,c)) continue;
+      s+='<circle cx="'+(c+m+0.5)+'" cy="'+(r+m+0.5)+'" r="0.5" fill="'+DATA+'"/>';
+    }}
+    [[0,0],[0,n-7],[n-7,0]].forEach(([fr,fc])=>{
+      const x=fc+m, y=fr+m;
+      s+='<rect x="'+x+'" y="'+y+'" width="7" height="7" rx="2.2" fill="'+FINDER+'"/>';
+      s+='<rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" rx="1.6" fill="#fff"/>';
+      s+='<rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" rx="1.5" fill="'+FINDER+'"/>';
+    });
+    return '<svg width="400" height="400" viewBox="0 0 '+size+' '+size+'" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"><rect width="'+size+'" height="'+size+'" fill="#fff"/>'+s+'</svg>';
+  }
   let wifiBuilt=false;
   function buildWifi(){
     const grid=document.getElementById('wifiGrid');
@@ -244,9 +265,8 @@
       if(!ssid){
         inner='<div class="unset">尚未設定<br>請於 index.html 的<br>WIFI 清單填入</div>';
       }else{
-        const qr=qrcode(0,'M'); qr.addData(wifiStr(ssid,pw,enc)); qr.make();
         const ssidLine = (label!==ssid) ? '<div class="ssid">'+ssid+'</div>' : '';
-        inner='<img src="'+qr.createDataURL(6,2)+'" alt="'+label+'">'+ssidLine;
+        inner='<div class="qrbox">'+styledQR(wifiStr(ssid,pw,enc))+'</div>'+ssidLine;
         cls='wifi-cell qr'; click=' onclick="zoomWifi('+i+')"';
       }
       return '<div class="'+cls+'"'+click+'><div class="cls">'+label+'</div>'+inner+'</div>';
@@ -260,9 +280,8 @@
     const pw=(w.pw!==undefined?w.pw:WIFI_SHARED.pw);
     const enc=w.enc||WIFI_SHARED.enc||'WPA';
     const label=w.cls||ssid;
-    const qr=qrcode(0,'M'); qr.addData(wifiStr(ssid,pw,enc)); qr.make();
     document.getElementById('zoomTitle').textContent=label;
-    document.getElementById('zoomImg').src=qr.createDataURL(14,4);
+    document.getElementById('zoomImg').innerHTML=styledQR(wifiStr(ssid,pw,enc));
     document.getElementById('wifiZoom').classList.add('open');
   }
   function closeZoom(){ document.getElementById('wifiZoom').classList.remove('open'); }
@@ -335,7 +354,7 @@
 </script>
   <div class="wifi-zoom" id="wifiZoom" onclick="closeZoom()">
     <div class="zoom-title" id="zoomTitle"></div>
-    <img id="zoomImg" alt="QR">
+    <div id="zoomImg"></div>
     <div class="zoom-hint">點畫面任一處關閉</div>
   </div>
   <div class="wifi-modal" id="wifiModal">
